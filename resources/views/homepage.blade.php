@@ -58,8 +58,8 @@
                                     <img class="asset-dark" src="dist/images/feature-01-dark.svg" alt="Feature 01">
                                 </div>
                                 <div class="feature-content">
-                                    <h3 class="feature-title mt-0">Discover</h3>
-                                    <p class="text-sm mb-0">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua dui.</p>
+                                    <a href="{{route('pdfs.index')}}"><h3 class="feature-title mt-0">PDFs</h3></a>
+                                    <p class="text-sm mb-0">You can find all the PDFs here.</p>
                                 </div>
                             </div>
                         </div>
@@ -70,8 +70,8 @@
                                     <img class="asset-dark" src="dist/images/feature-02-dark.svg" alt="Feature 02">
                                 </div>
                                 <div class="feature-content">
-                                    <h3 class="feature-title mt-0">Discover</h3>
-                                    <p class="text-sm mb-0">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua dui.</p>
+                                    <a href="{{route('html.index')}}"><h3 class="feature-title mt-0">HTML</h3></a>
+                                    <p class="text-sm mb-0">Get all the HTML snippets available in the portal</p>
                                 </div>
                             </div>
                         </div>
@@ -82,8 +82,8 @@
                                     <img class="asset-dark" src="dist/images/feature-03-dark.svg" alt="Feature 03">
                                 </div>
                                 <div class="feature-content">
-                                    <h3 class="feature-title mt-0">Discover</h3>
-                                    <p class="text-sm mb-0">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua dui.</p>
+                                    <a href="{{route('links.index')}}"><h3 class="feature-title mt-0">Links</h3></a>
+                                    <p class="text-sm mb-0">Get all the important links provided</p>
                                 </div>
                             </div>
                         </div>
@@ -98,9 +98,6 @@
                     <div class="cta-header text-center">
                         <h2 class="section-title mt-0">Get it and Switch</h2>
                         <p class="section-paragraph">Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
-                        <div class="cta-cta">
-                            <a class="button button-primary" href="#">Buy it now</a>
-                        </div>
                     </div>
                 </div>
             </div>

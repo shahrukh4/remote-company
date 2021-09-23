@@ -8,7 +8,6 @@
     <script>window.Laravel = { csrf: '{{ csrf_token() }}' }</script>
 
     <title>{{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     <!--  Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -22,6 +21,6 @@
     <div id="app"></div>
 
     <!-- built files will be auto injected -->
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/admin.js')}}"></script>
 </body>
 </html>

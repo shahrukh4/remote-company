@@ -293,7 +293,7 @@ var render = function() {
                     [
                       _c("md-icon", [_vm._v("update")]),
                       _vm._v(
-                        "\n              Stats for total HTML Code managed\n            "
+                        "\n              Stats for HTML Code managed\n            "
                       )
                     ],
                     1

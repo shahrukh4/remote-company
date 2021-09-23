@@ -44,7 +44,7 @@
             <div class="row w-100 d-flex">
               <div class="stats col-md-8">
                 <md-icon>update</md-icon>
-                Stats for total HTML Code managed
+                Stats for HTML Code managed
               </div>
               <div class="stats col-md-4 text-right"><router-link to="/">Go to page</router-link></div>
             </div>

@@ -1,0 +1,10 @@
+/**
+    All the front-end related CSS
+*/
+.html-card-section .card {
+  min-height: 300px;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: #FFFFFF;
+}

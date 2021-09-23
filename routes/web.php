@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\PDFFilesController;
+use App\Http\Controllers\HTMLSnippetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,34 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('homepage');
 })->name('home');
+
+/**
+    All the routes related to pdfs
+ */
+Route::group([], function() {
+    Route::resource('pdfs', PDFFilesController::class)->only([
+        'index'
+    ]);
+    Route::get('/pdfs/{pdf}/download', [PDFFilesController::class, 'downloadPDF'])->name('pdfs.download');
+});
+
+/**
+    All the routes related to html snippets
+ */
+Route::group([], function() {
+    Route::resource('html', HTMLSnippetController::class)->only([
+        'index'
+    ]);
+});
+
+/**
+All the routes related to links
+ */
+Route::group([], function() {
+    Route::resource('links', LinkController::class)->only([
+        'index'
+    ]);
+});
 
 Route::get('{any}', function () {
     return view('admin');

@@ -1,13 +1,12 @@
 /**
-  Placing all the custom styles here
+    All the front-end related CSS
 */
 
-.wrapper {
-  .sidebar {
-    .logo {
-      .simple-text {
-        font-size: 15px;
-      }
+.html-card-section {
+    .card {
+        min-height: 300px;
     }
-  }
+}
+.btn-primary.disabled, .btn-primary:disabled {
+    background-color: #FFFFFF;
 }

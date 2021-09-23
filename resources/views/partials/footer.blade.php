@@ -2,7 +2,7 @@
     <div class="container">
         <div class="site-footer-inner">
             <div class="brand footer-brand">
-                <a href="#">
+                <a href="{{route('home')}}">
                     <img class="asset-light" src="/images/vue-logo.png" alt="Logo" height="32px" width="32px">
                     <img class="asset-dark" src="/images/vue-logo.png" alt="Logo" height="32px" width="32px">
                 </a>

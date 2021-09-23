@@ -15,7 +15,7 @@ import MaterialDashboard from "./material-dashboard";
 // CSS
 import '@/sass/app.css'
 import '@/sass/page-example-common-style.css'
-import '@/sass/style.scss'
+import '@/sass/admin.scss'
 
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);

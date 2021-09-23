@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\PDFRepository;
+use App\LinkRepository;
+use App\HTMLRepository;
+use App\Contracts\PDFRepositoryInterface;
+use App\Contracts\LinkRepositoryInterface;
+use App\Contracts\HTMLRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(PDFRepositoryInterface::class, PDFRepository::class);
+        $this->app->bind(LinkRepositoryInterface::class, LinkRepository::class);
+        $this->app->bind(HTMLRepositoryInterface::class, HTMLRepository::class);
     }
 
     /**
