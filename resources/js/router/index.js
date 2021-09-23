@@ -16,17 +16,53 @@ const routes = [
       {
         path: 'pdfs',
         name: 'PDF',
-        component: () => import('@/js/pages/PDF')
+        component: () => import('@/js/pages/Pdfs/PDF')
+      },
+      {
+        path: 'pdfs/add',
+        name: 'Add PDF',
+        meta: {editMode: 0},
+        component: () => import('@/js/pages/Pdfs/AddPDF')
+      },
+      {
+        path: 'pdfs/:id/edit',
+        name: 'Edit PDF',
+        meta: {editMode: 1},
+        component: () => import('@/js/pages/Pdfs/AddPDF')
       },
       {
         path: 'html',
         name: 'HTML',
-        component: () => import('@/js/pages/HTML')
+        component: () => import('@/js/pages/HTML/HTML')
+      },
+      {
+        path: 'html/add',
+        name: 'Add HTML',
+        meta: {editMode: 0},
+        component: () => import('@/js/pages/HTML/AddHTML')
+      },
+      {
+        path: 'html/:id/edit',
+        name: 'Edit HTML',
+        meta: {editMode: 1},
+        component: () => import('@/js/pages/HTML/AddHTML')
       },
       {
         path: 'links',
         name: 'Links',
-        component: () => import('@/js/pages/Links')
+        component: () => import('@/js/pages/Links/Links')
+      },
+      {
+        path: 'links/add',
+        name: 'Add Link',
+        meta: {editMode: 0},
+        component: () => import('@/js/pages/Links/AddLink')
+      },
+      {
+        path: 'links/:id/edit',
+        name: 'Edit Link',
+        meta: {editMode: 1},
+        component: () => import('@/js/pages/Links/AddLink')
       }
     ]
   }

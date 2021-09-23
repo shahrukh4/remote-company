@@ -19,6 +19,9 @@
                 <div class="col">
                     <a href="{{route('links.index')}}"><h3 class="small mt-0">Links</h3></a>
                 </div>
+                <div class="col">
+                    <a href="/admin" target="_blank"><h3 class="small mt-0">Admin</h3></a>
+                </div>
             </div>
         </div>
     </div>

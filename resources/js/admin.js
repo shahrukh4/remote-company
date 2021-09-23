@@ -8,6 +8,7 @@ import router from './router'
 
 
 // Plugins
+import Vuelidate from 'vuelidate'
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import MaterialDashboard from "./material-dashboard";
@@ -17,6 +18,7 @@ import '@/sass/app.css'
 import '@/sass/page-example-common-style.css'
 import '@/sass/admin.scss'
 
+Vue.use(Vuelidate)
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(MaterialDashboard);
