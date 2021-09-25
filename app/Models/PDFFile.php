@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\PDFFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,12 @@ class PDFFile extends Model
     protected $casts = [
         'file' => 'array',
     ];
+
+    /** @return PDFFactory */
+    protected static function newFactory()
+    {
+        return PDFFactory::new();
+    }
 
     /**
      * Get the route key for the model.

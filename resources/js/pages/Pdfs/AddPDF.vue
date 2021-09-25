@@ -18,12 +18,12 @@
         <div>
           <md-button class="md-dense md-raised md-primary" @click="handlePDFAction">
             <md-progress-spinner
-                class="md-accent"
-                md-mode="indeterminate"
-                :md-stroke="3"
-                :md-diameter="20"
-                :disabled="loading.add || loading.update"
-                v-if="loading.add || loading.update"
+              class="md-accent"
+              md-mode="indeterminate"
+              :md-stroke="3"
+              :md-diameter="20"
+              :disabled="loading.add || loading.update"
+              v-if="loading.add || loading.update"
             >
             </md-progress-spinner>
             <span v-else>{{!$route.meta.editMode ? 'Add' : 'Edit'}} PDF</span>

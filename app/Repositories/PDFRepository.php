@@ -44,7 +44,11 @@ class PDFRepository implements PDFRepositoryInterface {
         $html = $this->show($pdfId);
 
         $html->title  = $params['title'];
-        $html->file  = $params['file'];
+        
+        if(!empty($params['file'])) {            
+            $html->file  = $params['file'];
+        }
+        
         $html->save();
     }
 

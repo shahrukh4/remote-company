@@ -96,6 +96,9 @@ class HTMLSnippetController extends Controller
         ], 200);
     }
 
+    /**
+     * Show all the available HTML data
+     */
     public function showAllHTMLCodes() {
         $html = $this->htmlRepository->all();
 

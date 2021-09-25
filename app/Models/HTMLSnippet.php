@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\HTMLFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,10 @@ class HTMLSnippet extends Model
     protected $fillable = [
         'title', 'description', 'content',
     ];
+
+    /** @return HTMLFactory */
+    protected static function newFactory()
+    {
+        return HTMLFactory::new();
+    }
 }

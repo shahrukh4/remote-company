@@ -46,8 +46,8 @@ class PDFFilesController extends Controller
         /** If file has uploaded */
         if(!empty($file)) {
             $name = $file->getClientOriginalName();
-            $arr['file'] = ['name' => $name, 'path' => 'pdfs/'. $name];
-            Storage::disk('local')->put('pdfs/'. $name, file_get_contents($file));
+            $arr['file'] = ['name' => $name, 'path' => 'storage/pdfs/'. $name];
+            Storage::disk('local')->put('public/pdfs/'. $name, file_get_contents($file));
         }
 
         $this->pdfRepository->store($arr);
@@ -87,8 +87,8 @@ class PDFFilesController extends Controller
         /** If file has uploaded */
         if(!empty($file)) {
             $name = $file->getClientOriginalName();
-            $arr['file'] = ['name' => $name, 'path' => 'pdfs/'. $name];
-            Storage::disk('local')->put('pdfs/'. $name, file_get_contents($file));
+            $arr['file'] = ['name' => $name, 'path' => 'storage/pdfs/'. $name];
+            Storage::disk('local')->put('public/pdfs/'. $name, file_get_contents($file));
         }
 
         $this->pdfRepository->update($pdf, $arr);
@@ -113,6 +113,10 @@ class PDFFilesController extends Controller
         ], 200);
     }
 
+    /**
+     * Get all links listing page
+     * @return mixed
+     */
     public function getAllPdfs() {
         $pdfs = $this->pdfRepository->all();
 
@@ -121,8 +125,12 @@ class PDFFilesController extends Controller
         ]);
     }
 
+    /**
+     * Make selected PDF download for user
+     * @param PDFFile $pdf
+     * @return mixed
+     */
     public function downloadPDF(PDFFile $pdf) {
-        dd(url($pdf->file['path']));
         return response()->download($pdf->file['path']);
     }
 }

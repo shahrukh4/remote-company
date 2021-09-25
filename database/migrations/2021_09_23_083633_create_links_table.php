@@ -17,7 +17,7 @@ class CreateLinksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('link');
-            $table->tinyInteger('open_new_tab', 1)->default(0);
+            $table->tinyInteger('open_new_tab')->default(0);
             $table->timestamps();
         });
     }

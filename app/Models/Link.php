@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\LinkFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,4 +18,10 @@ class Link extends Model
     protected $fillable = [
         'title', 'link', 'open_new_tab',
     ];
+
+    /** @return LinkFactory */
+    protected static function newFactory()
+    {
+        return LinkFactory::new();
+    }
 }

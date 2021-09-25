@@ -23,7 +23,7 @@ Route::get('/', function () {
 /**
     All the routes related to pdfs
  */
-Route::get('/pdfs', [PDFFilesController::class, 'getAllPdfs'])->name('pdfs.index');
+Route::get('/pdf-files', [PDFFilesController::class, 'getAllPdfs'])->name('pdfs.index');
 Route::get('/pdfs/{pdf}/download', [PDFFilesController::class, 'downloadPDF'])->name('pdfs.download');
 
 

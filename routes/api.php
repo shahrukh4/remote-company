@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\PDFFilesController;
 use App\Http\Controllers\HTMLSnippetController;
@@ -21,6 +22,11 @@ use App\Http\Controllers\HTMLSnippetController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**
+    All the routes related to home/dashboard
+ */
+Route::get('/dashboard', [HomeController::class, 'getDashboardData']);
 
 /**
     All the routes resource related to links

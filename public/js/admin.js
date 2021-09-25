@@ -2962,11 +2962,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GET_LINKS": () => (/* binding */ GET_LINKS),
 /* harmony export */   "GET_HTML_DATA": () => (/* binding */ GET_HTML_DATA),
-/* harmony export */   "GET_PDF_DATA": () => (/* binding */ GET_PDF_DATA)
+/* harmony export */   "GET_PDF_DATA": () => (/* binding */ GET_PDF_DATA),
+/* harmony export */   "GET_DASHBOARD_DATA": () => (/* binding */ GET_DASHBOARD_DATA)
 /* harmony export */ });
 var GET_LINKS = 'getLinksData';
 var GET_HTML_DATA = 'getHtmlData';
 var GET_PDF_DATA = 'getPdfData';
+var GET_DASHBOARD_DATA = 'getDashboardData';
 
 /***/ }),
 
@@ -2991,6 +2993,74 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2_
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   modules: _js_store_modules__WEBPACK_IMPORTED_MODULE_0__["default"]
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/dashboard.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/dashboard.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "namespaced": () => (/* binding */ namespaced),
+/* harmony export */   "state": () => (/* binding */ state),
+/* harmony export */   "actions": () => (/* binding */ actions),
+/* harmony export */   "mutations": () => (/* binding */ mutations)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/js/store/action.types */ "./resources/js/store/action.types.js");
+/* harmony import */ var _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/js/store/mutation.types */ "./resources/js/store/mutation.types.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+/**
+ * Whether want to namespace it ot not
+ * @type {boolean}
+ */
+
+var namespaced = true;
+/**
+ * State related to HTML
+ * @type {Object}
+ */
+
+var state = {
+  dashboard: []
+};
+/**
+ * Actions related to HTML
+ * @type {Object}
+ */
+
+var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_DASHBOARD_DATA, function (_ref) {
+  var commit = _ref.commit;
+  return new Promise(function (resolve, reject) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/dashboard').then(function (_ref2) {
+      var data = _ref2.data;
+      commit(_js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_DASHBOARD_DATA, {
+        dashboard: data.data
+      });
+      resolve();
+    })["catch"](function (error) {
+      console.log(error);
+      reject(error);
+    });
+  });
+});
+/**
+ * Mutations related to HTML
+ * @type {Object}
+ */
+
+var mutations = _defineProperty({}, _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_DASHBOARD_DATA, function (state, payload) {
+  Object.assign(state, payload);
+});
 
 /***/ }),
 
@@ -3076,13 +3146,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pdf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pdf */ "./resources/js/store/modules/pdf.js");
 /* harmony import */ var _html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./html */ "./resources/js/store/modules/html.js");
 /* harmony import */ var _links__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./links */ "./resources/js/store/modules/links.js");
+/* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboard */ "./resources/js/store/modules/dashboard.js");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   pdf: _pdf__WEBPACK_IMPORTED_MODULE_0__,
   html: _html__WEBPACK_IMPORTED_MODULE_1__,
-  links: _links__WEBPACK_IMPORTED_MODULE_2__
+  links: _links__WEBPACK_IMPORTED_MODULE_2__,
+  dashboard: _dashboard__WEBPACK_IMPORTED_MODULE_3__
 });
 
 /***/ }),
@@ -3234,11 +3307,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SET_LINKS_DATA": () => (/* binding */ SET_LINKS_DATA),
 /* harmony export */   "SET_HTML_DATA": () => (/* binding */ SET_HTML_DATA),
-/* harmony export */   "SET_PDF_DATA": () => (/* binding */ SET_PDF_DATA)
+/* harmony export */   "SET_PDF_DATA": () => (/* binding */ SET_PDF_DATA),
+/* harmony export */   "SET_DASHBOARD_DATA": () => (/* binding */ SET_DASHBOARD_DATA)
 /* harmony export */ });
 var SET_LINKS_DATA = 'setLinksData';
 var SET_HTML_DATA = 'setHtmlData';
 var SET_PDF_DATA = 'setPdfData';
+var SET_DASHBOARD_DATA = 'setDashboardData';
 
 /***/ }),
 

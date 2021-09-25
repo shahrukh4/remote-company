@@ -1,7 +1,7 @@
 @extends('partials.master')
 @section('title', 'HTML Snippets')
 @section('content')
-    <main>
+    <main id="htmlss">
         <section class="cta section">
             <div class="container-sm">
                 <div class="cta-inner section-inner">
@@ -33,14 +33,14 @@
 @section('scripts')
     <script>
         new Vue({
-            el: '#app',
+            el: '#html',
             data() {
                 return {
                      button: {
                          text: 'Copy Code',
                          disabled: {
-                             text: '',
-                             index: null
+                            text: '',
+                            index: null
                          }
                      }
                 }
@@ -49,8 +49,7 @@
 
             },
             methods: {
-                showButtonText (shahIndex) {
-                    console.log(shahIndex, '<h1>2nd HTML</h1>')
+                showButtonText () {
                     return this.button.disabled.text || this.button.text
                 },
                 checkIfDisabled (index) {

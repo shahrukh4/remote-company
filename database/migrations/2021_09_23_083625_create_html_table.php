@@ -29,6 +29,6 @@ class CreateHtmlTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h_t_m_l_snippets');
+        Schema::dropIfExists('htmls');
     }
 }

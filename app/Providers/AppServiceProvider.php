@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\PDFRepository;
 use App\LinkRepository;
 use App\HTMLRepository;
+use Illuminate\Support\ServiceProvider;
 use App\Contracts\PDFRepositoryInterface;
 use App\Contracts\LinkRepositoryInterface;
 use App\Contracts\HTMLRepositoryInterface;

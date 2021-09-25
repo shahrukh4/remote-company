@@ -13,7 +13,7 @@
 
           <template slot="content">
             <p class="category">Total PDFs</p>
-            <h3 class="title">+245</h3>
+            <h3 class="title">+{{dashboard.pdfs ? dashboard.pdfs.length : 0}}</h3>
           </template>
 
           <template slot="footer">
@@ -38,7 +38,7 @@
           </template>
           <template slot="content">
             <p class="category">Total HTML Snippets</p>
-            <h3 class="title">+245</h3>
+            <h3 class="title">+{{dashboard.html ? dashboard.html.length : 0}}</h3>
           </template>
           <template slot="footer">
             <div class="row w-100 d-flex">
@@ -62,7 +62,7 @@
           </template>
           <template slot="content">
             <p class="category">Total Links</p>
-            <h3 class="title">+245</h3>
+            <h3 class="title">+{{dashboard.pdfs ? dashboard.pdfs.length : 0}}</h3>
           </template>
           <template slot="footer">
             <div class="row w-100 d-flex">
@@ -84,6 +84,9 @@
     StatsCard
   } from '@/js/components'
 
+  import {mapState, mapActions} from 'vuex'
+  import {GET_DASHBOARD_DATA} from '@/js/store/action.types'
+
   export default {
     name: 'Dashboard',
     components: {StatsCard},
@@ -91,6 +94,19 @@
       return {
 
       }
+    },
+    computed: {
+      ...mapState({
+        dashboard: state => state.dashboard.dashboard
+      })
+    },
+    created() {
+      this.getDashboardDetails()
+    },
+    methods: {
+      ...mapActions({
+        getDashboardDetails: `dashboard/${GET_DASHBOARD_DATA}`
+      })
     }
 }
 </script>
