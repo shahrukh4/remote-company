@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\PDFFilesController;
+use App\Http\Controllers\HTMLSnippetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     All the routes resource related to links
  */
 Route::resource('links', LinkController::class);
+
+/**
+    All the routes resource related to html
+ */
+Route::resource('html', HTMLSnippetController::class);
+
+/**
+All the routes resource related to pdfs
+ */
+Route::resource('pdfs', PDFFilesController::class);
+
+Route::post('/pdfs/update/{pdf}', [PDFFilesController::class, 'update'])->name('pdfs.update');

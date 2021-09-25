@@ -79,6 +79,20 @@ class LinkController extends Controller
     }
 
     /**
+     * Delete data for any given link
+     * @param mixed $linkId
+     * @return JsonResponse
+     */
+    public function destroy($linkId): JsonResponse {
+        $this->linkRepository->destroy($linkId);
+
+        return response()->json([
+            'error' => false,
+            'message' => 'Link deleted successfully.'
+        ], 200);
+    }
+
+    /**
      * Get all links listing page
      * @return mixed
      */

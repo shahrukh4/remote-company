@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePDFFilesTable extends Migration
+class CreatepdfTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreatePDFFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('p_d_f_files', function (Blueprint $table) {
+        Schema::create('pdfs', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->json('file')->nullable();
             $table->timestamps();
         });
     }

@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     /**
      * Check all validations before submission of form
-     * @return void
+     * @return boolean
      */
     checkValidations: function checkValidations() {
       this.$v.$touch();
@@ -145,8 +145,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.loading.update = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/links/".concat(this.$route.params.id), this.link).then(function (_ref2) {
-        var data = _ref2.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/links/".concat(this.$route.params.id), this.link).then(function () {
         _this2.loading.showPrompt = true;
       })["catch"](function (error) {
         console.log(error);
@@ -165,8 +164,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.loading.add = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/links', this.link).then(function (_ref3) {
-        var data = _ref3.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/links', this.link).then(function (_ref2) {
+        var data = _ref2.data;
         _this3.loading.showPrompt = true;
       })["catch"](function (error) {
         console.log(error);

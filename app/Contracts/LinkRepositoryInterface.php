@@ -34,4 +34,11 @@ interface LinkRepositoryInterface {
      * @return void
      */
     public function update($linkId, array $params);
+
+    /**
+     * Delete data for any given link
+     * @param mixed $linkId
+     * @return void
+     */
+    public function destroy($linkId);
 }

@@ -1,3 +1,3 @@
 export const GET_LINKS = 'getLinksData'
-export const GET_FOOD_DATA = 'getFoodData'
-export const SUBMIT_ORDER_RATING = 'submitOrderRating'
+export const GET_HTML_DATA = 'getHtmlData'
+export const GET_PDF_DATA = 'getPdfData'

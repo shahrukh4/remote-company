@@ -61,6 +61,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -75,6 +78,7 @@ __webpack_require__.r(__webpack_exports__);
       html: {
         title: '',
         description: '',
+        snippet: '',
         content: ''
       }
     };
@@ -95,6 +99,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    /**
+     * Check all validations before submission of form
+     * @return boolean
+     */
     checkValidations: function checkValidations() {
       this.$v.$touch();
 
@@ -104,21 +112,28 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
     },
+
+    /**
+     * Get details of given html id
+     * @return void
+     */
     getHTMLDetail: function getHTMLDetail() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("").then(function (_ref) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/html/".concat(this.$route.params.id)).then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
-        Object.assign(_this.html, {
-          title: 'Shahrkh',
-          description: 'jdhaaja',
-          content: 'aafafa'
+        Object.assign(_this.html, data.data, {
+          snippet: data.data.content
         });
       })["catch"](function (error) {
         console.log(error);
       });
     },
+
+    /**
+     * Handle html action before submission
+     * @return void
+     */
     handleHTMLAction: function handleHTMLAction() {
       if (this.checkValidations()) {
         if (this.$route.meta.editMode) {
@@ -128,13 +143,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
+
+    /**
+     * Handle action as edit if page is opened in edit mode
+     * @return void
+     */
     handleEditHTML: function handleEditHTML() {
       var _this2 = this;
 
       this.loading.update = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().put("https://jsonplaceholder.typicode.com/posts/".concat(this.$route.params.id), this.html).then(function (_ref2) {
-        var data = _ref2.data;
-        console.log(data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/html/".concat(this.$route.params.id), Object.assign(this.html, {
+        snippet: this.html.content
+      })).then(function () {
         _this2.loading.showPrompt = true;
       })["catch"](function (error) {
         console.log(error);
@@ -142,13 +162,19 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading.update = false;
       });
     },
+
+    /**
+     * Add a new HTML, if page is opened in add mode
+     * @return void
+     */
     addHTML: function addHTML() {
       var _this3 = this;
 
       this.loading.add = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('https://jsonplaceholder.typicode.com/posts', this.html).then(function (_ref3) {
-        var data = _ref3.data;
-        console.log(data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/html', Object.assign(this.html, {
+        snippet: this.html.content
+      })).then(function (_ref2) {
+        var data = _ref2.data;
         _this3.loading.showPrompt = true;
       })["catch"](function (error) {
         console.log(error);

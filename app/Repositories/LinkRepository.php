@@ -48,4 +48,14 @@ class LinkRepository implements LinkRepositoryInterface {
         $link->open_new_tab  = $params['open_new_tab'];
         $link->save();
     }
+
+    /**
+    * Delete data for any given link
+    * @param mixed $linkId
+    * @return void
+    */
+    public function destroy($linkId) {
+        $link = $this->show($linkId);
+        $link->delete();
+    }
 }

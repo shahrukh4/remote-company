@@ -55,9 +55,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
-var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.regex('pdf.file', /\.(pdf)$/);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AddPDF',
   data: function data() {
@@ -77,10 +77,6 @@ var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.rege
     pdf: {
       title: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
-      },
-      file: {
-        pdfRule: pdfRule,
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
       }
     }
   },
@@ -90,6 +86,18 @@ var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.rege
     }
   },
   methods: {
+    /**
+     * Save in file data on change of fil
+     * @return void
+     */
+    onChangeFileUpload: function onChangeFileUpload() {
+      this.pdf.file = this.$refs.uploadedPdf.files[0];
+    },
+
+    /**
+     * Check all validations before submission of form
+     * @return boolean
+     */
     checkValidations: function checkValidations() {
       this.$v.$touch();
 
@@ -99,20 +107,26 @@ var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.rege
         return true;
       }
     },
+
+    /**
+     * Get details of given pdf id
+     * @return void
+     */
     getPDFDetail: function getPDFDetail() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("").then(function (_ref) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/pdfs/".concat(this.$route.params.id)).then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
-        Object.assign(_this.pdf, {
-          title: 'Shahrkh',
-          file: 'jdhaaja'
-        });
+        Object.assign(_this.pdf, data.data);
       })["catch"](function (error) {
         console.log(error);
       });
     },
+
+    /**
+     * Handle pdf action before submission
+     * @return void
+     */
     handlePDFAction: function handlePDFAction() {
       if (this.checkValidations()) {
         if (this.$route.meta.editMode) {
@@ -122,13 +136,23 @@ var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.rege
         }
       }
     },
+
+    /**
+     * Handle action as edit if page is opened in edit mode
+     * @return void
+     */
     handleEditPDF: function handleEditPDF() {
       var _this2 = this;
 
       this.loading.update = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().put("https://jsonplaceholder.typicode.com/posts/".concat(this.$route.params.id), this.pdf).then(function (_ref2) {
-        var data = _ref2.data;
-        console.log(data);
+      var formData = new FormData();
+      formData.append('file', this.pdf.file);
+      formData.append('title', this.pdf.title);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/pdfs/update/".concat(this.$route.params.id), formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function () {
         _this2.loading.showPrompt = true;
       })["catch"](function (error) {
         console.log(error);
@@ -136,13 +160,23 @@ var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.rege
         _this2.loading.update = false;
       });
     },
+
+    /**
+     * Add a new PDF, if page is opened in add mode
+     * @return void
+     */
     addPDF: function addPDF() {
       var _this3 = this;
 
       this.loading.add = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('https://jsonplaceholder.typicode.com/posts', this.pdf).then(function (_ref3) {
-        var data = _ref3.data;
-        console.log(data);
+      var formData = new FormData();
+      formData.append('file', this.pdf.file);
+      formData.append('title', this.pdf.title);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/pdfs", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function () {
         _this3.loading.showPrompt = true;
       })["catch"](function (error) {
         console.log(error);
@@ -284,40 +318,21 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c(
-              "md-field",
-              [
-                _c("label", [
-                  _vm._v(
-                    _vm._s(!_vm.$route.meta.editMode ? "Add" : "Edit") + " File"
-                  )
-                ]),
-                _vm._v(" "),
-                _c("md-file", {
-                  attrs: { accept: "application/pdf" },
-                  model: {
-                    value: _vm.pdf.file,
-                    callback: function($$v) {
-                      _vm.$set(_vm.pdf, "file", $$v)
-                    },
-                    expression: "pdf.file"
+            _c("md-field", [
+               false
+                ? 0
+                : _vm._e(),
+              _vm._v(" "),
+              _c("input", {
+                ref: "uploadedPdf",
+                attrs: { type: "file", accept: "application/pdf" },
+                on: {
+                  change: function($event) {
+                    return _vm.onChangeFileUpload()
                   }
-                }),
-                _vm._v(" "),
-                _vm.$v.pdf.file.$anyError && !_vm.$v.pdf.file.required
-                  ? _c("div", { staticClass: "error" }, [
-                      _vm._v("Please choose a file")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.$v.pdf.file.$anyError && !_vm.$v.pdf.file.pdfRule
-                  ? _c("div", { staticClass: "error" }, [
-                      _vm._v("Choose PDF files only")
-                    ])
-                  : _vm._e()
-              ],
-              1
-            ),
+                }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "div",

@@ -116,19 +116,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
 
     /**
-     * Handle post delete confirmation
+     * Handle link delete confirmation
      * @return void
      */
     handleDeleteConfirmation: function handleDeleteConfirmation() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("https://jsonplaceholder.typicode.com/posts/".concat(this.link.id)).then(function (_ref) {
-        var data = _ref.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/api/links/".concat(this.link.id)).then(function () {
         _this.loaders.confirmDelete = true;
       })["catch"](function (error) {
         console.log(error);
       })["finally"](function () {
         _this.loaders["delete"] = false;
+
+        _this.getLinks();
       });
     }
   })

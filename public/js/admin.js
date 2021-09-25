@@ -2961,12 +2961,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GET_LINKS": () => (/* binding */ GET_LINKS),
-/* harmony export */   "GET_FOOD_DATA": () => (/* binding */ GET_FOOD_DATA),
-/* harmony export */   "SUBMIT_ORDER_RATING": () => (/* binding */ SUBMIT_ORDER_RATING)
+/* harmony export */   "GET_HTML_DATA": () => (/* binding */ GET_HTML_DATA),
+/* harmony export */   "GET_PDF_DATA": () => (/* binding */ GET_PDF_DATA)
 /* harmony export */ });
 var GET_LINKS = 'getLinksData';
-var GET_FOOD_DATA = 'getFoodData';
-var SUBMIT_ORDER_RATING = 'submitOrderRating';
+var GET_HTML_DATA = 'getHtmlData';
+var GET_PDF_DATA = 'getPdfData';
 
 /***/ }),
 
@@ -3012,8 +3012,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/js/store/action.types */ "./resources/js/store/action.types.js");
 /* harmony import */ var _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/js/store/mutation.types */ "./resources/js/store/mutation.types.js");
-var _actions;
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -3026,25 +3024,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var namespaced = true;
 /**
- * State related to Orders
+ * State related to HTML
  * @type {Object}
  */
 
 var state = {
-  orders: []
+  html: []
 };
 /**
- * Actions related to Orders
+ * Actions related to HTML
  * @type {Object}
  */
 
-var actions = (_actions = {}, _defineProperty(_actions, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_FOOD_DATA, function (_ref) {
+var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_HTML_DATA, function (_ref) {
   var commit = _ref.commit;
   return new Promise(function (resolve, reject) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders').then(function (_ref2) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/html').then(function (_ref2) {
       var data = _ref2.data;
-      commit(_js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_ORDER_DATA, {
-        orders: data
+      commit(_js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_HTML_DATA, {
+        html: data
       });
       resolve();
     })["catch"](function (error) {
@@ -3052,29 +3050,13 @@ var actions = (_actions = {}, _defineProperty(_actions, _js_store_action_types__
       reject(error);
     });
   });
-}), _defineProperty(_actions, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.ORDER_FOOD, function (_ref3, _ref4) {
-  var commit = _ref3.commit;
-  var quantity = _ref4.quantity,
-      foodId = _ref4.foodId,
-      userId = _ref4.userId;
-  return new Promise(function (resolve, reject) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/order/".concat(foodId), {
-      userId: userId,
-      quantity: quantity
-    }).then(function () {
-      resolve();
-    })["catch"](function (error) {
-      console.log(error);
-      reject(error);
-    });
-  });
-}), _actions);
+});
 /**
- * Mutations related to Orders
+ * Mutations related to HTML
  * @type {Object}
  */
 
-var mutations = _defineProperty({}, _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_ORDER_DATA, function (state, payload) {
+var mutations = _defineProperty({}, _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_HTML_DATA, function (state, payload) {
   Object.assign(state, payload);
 });
 
@@ -3190,7 +3172,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/js/store/action.types */ "./resources/js/store/action.types.js");
+/* harmony import */ var _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/js/store/mutation.types */ "./resources/js/store/mutation.types.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3206,17 +3190,21 @@ var namespaced = true;
  */
 
 var state = {
-  ratings: []
+  pdfs: []
 };
 /**
- * Actions related to Ratings
+ * Actions related to PDF
  * @type {Object}
  */
 
-var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_ORDER_RATING, function (_ref, payload) {
+var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_PDF_DATA, function (_ref) {
   var commit = _ref.commit;
   return new Promise(function (resolve, reject) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/order/".concat(payload.orderId, "/rating"), payload).then(function () {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/pdfs').then(function (_ref2) {
+      var data = _ref2.data;
+      commit(_js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_PDF_DATA, {
+        pdfs: data
+      });
       resolve();
     })["catch"](function (error) {
       console.log(error);
@@ -3225,11 +3213,13 @@ var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODUL
   });
 });
 /**
- * Mutations related to App
+ * Mutations related to PDF
  * @type {Object}
  */
 
-var mutations = {};
+var mutations = _defineProperty({}, _js_store_mutation_types__WEBPACK_IMPORTED_MODULE_2__.SET_PDF_DATA, function (state, payload) {
+  Object.assign(state, payload);
+});
 
 /***/ }),
 
@@ -3243,10 +3233,12 @@ var mutations = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SET_LINKS_DATA": () => (/* binding */ SET_LINKS_DATA),
-/* harmony export */   "SET_ORDER_DATA": () => (/* binding */ SET_ORDER_DATA)
+/* harmony export */   "SET_HTML_DATA": () => (/* binding */ SET_HTML_DATA),
+/* harmony export */   "SET_PDF_DATA": () => (/* binding */ SET_PDF_DATA)
 /* harmony export */ });
 var SET_LINKS_DATA = 'setLinksData';
-var SET_ORDER_DATA = 'setOrderData';
+var SET_HTML_DATA = 'setHtmlData';
+var SET_PDF_DATA = 'setPdfData';
 
 /***/ }),
 

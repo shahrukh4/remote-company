@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { SUBMIT_ORDER_RATING } from '@/js/store/action.types'
+import { GET_PDF_DATA } from '@/js/store/action.types'
+import { SET_PDF_DATA } from '@/js/store/mutation.types'
 
 /**
  * Whether want to namespace it ot not
@@ -12,22 +13,23 @@ export const namespaced = true
  * @type {Object}
  */
 export const state = {
-  ratings: []
+  pdfs: []
 }
 
 /**
- * Actions related to Ratings
+ * Actions related to PDF
  * @type {Object}
  */
 export const actions = {
   /**
-   * Submit order ratings
+   * Fetch PDF data from DB
    * @param {object} context
    */
-  [SUBMIT_ORDER_RATING] ({commit}, payload) {
+  [GET_PDF_DATA] ({commit}) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/order/${payload.orderId}/rating`, payload)
-      .then(() => {
+      axios.get('/api/pdfs')
+      .then(({data}) => {
+        commit(SET_PDF_DATA, {pdfs: data})
         resolve()
       })
       .catch((error) => {
@@ -39,9 +41,16 @@ export const actions = {
 }
 
 /**
- * Mutations related to App
+ * Mutations related to PDF
  * @type {Object}
  */
 export const mutations = {
-
+  /**
+   * Common mutator for setting up the state
+   * @param {object} state
+   * @param {object} payload
+   */
+  [SET_PDF_DATA] (state, payload) {
+    Object.assign(state, payload)
+  }
 }

@@ -1,4 +1,5 @@
 <template>
+  <!-- PDF Section Begins -->
   <div class="content">
     <div class="md-layout">
       <div
@@ -16,12 +17,13 @@
               </div>
             </div>
           </md-card-header>
+          <!-- Table Content Begins -->
           <md-card-content>
-            <md-table v-model="pdfs">
+            <md-table v-model="pdfs.pdfs">
               <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
                 <md-table-cell md-label="Title">{{ item.title.substring(0, 30) }}</md-table-cell>
-                <md-table-cell md-label="Link">{{ item.file.substring(0, 30) }}</md-table-cell>
+                <md-table-cell md-label="Link">{{ item.file.name.substring(0, 30) }}</md-table-cell>
                 <md-table-cell md-label="Created">{{ item.created_at | prettyDate }}</md-table-cell>
                 <md-table-cell md-label="Action" >
                   <md-icon @click.native="$router.push(`pdfs/${item.id}/edit`)">edit</md-icon>
@@ -29,29 +31,33 @@
                 </md-table-cell>
               </md-table-row>
             </md-table>
-          </md-card-content>
+          </md-card-content> <!-- Table Content Ends -->
         </md-card>
       </div>
     </div>
+    <!-- Action Dialog Begins -->
     <md-dialog-confirm
-        md-title="Are you sure, you want to delete this PDF?"
-        md-content="This will delete PDF permanently"
-        md-confirm-text="Agree"
-        md-cancel-text="Disagree"
-        :md-active.sync="loaders.delete"
-        @md-confirm="handleDeleteConfirmation"
+      md-title="Are you sure, you want to delete this PDF?"
+      md-content="This will delete PDF permanently"
+      md-confirm-text="Agree"
+      md-cancel-text="Disagree"
+      :md-active.sync="loaders.delete"
+      @md-confirm="handleDeleteConfirmation"
     />
     <md-dialog-alert
-        md-title="PDF deleted!"
-        :md-content="`Your PDF code has been deleted.`"
-        :md-active.sync="loaders.confirmDelete"
+      md-title="PDF deleted!"
+      :md-content="`Your PDF code has been deleted.`"
+      :md-active.sync="loaders.confirmDelete"
     />
-  </div>
+    <!-- Action Dialog Ends -->
+  </div> <!-- PDF Section Ends -->
 </template>
 
 <script>
   import axios from "axios";
+  import { mapState, mapActions } from 'vuex'
   import GeneralMixin from '@/js/mixins/general'
+  import {GET_PDF_DATA} from '@/js/store/action.types'
 
   export default {
     name: 'PDF',
@@ -59,49 +65,43 @@
     data() {
       return {
         pdf: {id: 0},
-        pdfs: [
-          {
-            id: 1,
-            title: 'Shahrukh',
-            file: "helopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          },
-          {
-            id: 2,
-            title: 'Anwar',
-            file: "helopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          },
-          {
-            id: 3,
-            title: 'Farha',
-            file: "helopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          },{
-            id: 4,
-            title: 'Bobdu',
-            file: "helopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          }
-        ],
         loaders: {delete: false, confirmDelete: false}
       };
     },
+    computed: {
+      ...mapState({
+        pdfs: state => state.pdf
+      })
+    },
+    created() {
+      this.getPdfs()
+    },
     methods: {
+      ...mapActions({
+        getPdfs: `pdf/${GET_PDF_DATA}`
+      }),
+      /**
+       * Handle Delete action
+       * @return void
+       */
       handleDelete (pdfId) {
         this.pdf.id = pdfId
         this.loaders.delete = true
       },
+      /**
+       * Handle pdf delete confirmation
+       * @return void
+       */
       handleDeleteConfirmation () {
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${this.pdf.id}`)
+        axios.delete(`/api/pdfs/${this.pdf.id}`)
         .then(({data}) => {
-          console.log(data)
           this.loaders.confirmDelete = true
         })
         .catch((error) => {
           console.log(error)
         })
         .finally(() => {
+          this.getPdfs()
           this.loaders.delete = false
         })
       }

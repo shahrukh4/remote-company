@@ -89,12 +89,12 @@
         this.loaders.delete = true
       },
       /**
-       * Handle post delete confirmation
+       * Handle link delete confirmation
        * @return void
        */
       handleDeleteConfirmation () {
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${this.link.id}`)
-        .then(({data}) => {
+        axios.delete(`/api/links/${this.link.id}`)
+        .then(() => {
           this.loaders.confirmDelete = true
         })
         .catch((error) => {
@@ -102,6 +102,7 @@
         })
         .finally(() => {
           this.loaders.delete = false
+          this.getLinks()
         })
       }
     }

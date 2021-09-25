@@ -23,30 +23,25 @@ Route::get('/', function () {
 /**
     All the routes related to pdfs
  */
-Route::group([], function() {
-//    Route::resource('pdfs', PDFFilesController::class)->only([
-//        'index'
-//    ]);
-    Route::get('/pdfs', [PDFFilesController::class, 'getAllPdfs'])->name('pdfs.index');
-    Route::get('/pdfs/{pdf}/download', [PDFFilesController::class, 'downloadPDF'])->name('pdfs.download');
-});
+Route::get('/pdfs', [PDFFilesController::class, 'getAllPdfs'])->name('pdfs.index');
+Route::get('/pdfs/{pdf}/download', [PDFFilesController::class, 'downloadPDF'])->name('pdfs.download');
+
 
 /**
     All the routes related to html snippets
  */
-Route::group([], function() {
-    Route::resource('html', HTMLSnippetController::class)->only([
-        'index'
-    ]);
-});
+Route::get('/html', [HTMLSnippetController::class, 'showAllHTMLCodes'])->name('html.index');
 
-Route::group([], function() {
-//    Route::resource('links', LinkController::class)->only([
-//        'index'
-//    ]);
-    Route::get('/links', [LinkController::class, 'getAllLinks'])->name('links.index');
-});
 
+/**
+    All the routes related to links
+ */
+Route::get('/links', [LinkController::class, 'getAllLinks'])->name('links.index');
+
+
+/**
+    All the routes related to vuejs based admin view
+ */
 Route::get('{any}', function () {
     return view('admin');
 })->where('any', '.*');

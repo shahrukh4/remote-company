@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHTMLSnippetsTable extends Migration
+class CreateHtmlTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateHTMLSnippetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('h_t_m_l_snippets', function (Blueprint $table) {
+        Schema::create('htmls', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }

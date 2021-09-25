@@ -76,7 +76,7 @@
     methods: {
       /**
        * Check all validations before submission of form
-       * @return void
+       * @return boolean
        */
       checkValidations () {
         this.$v.$touch()
@@ -119,7 +119,7 @@
       handleEditLink () {
         this.loading.update = true
         axios.put(`/api/links/${this.$route.params.id}`, this.link)
-        .then(({data}) => {
+        .then(() => {
           this.loading.showPrompt = true
         })
         .catch((error) => {
