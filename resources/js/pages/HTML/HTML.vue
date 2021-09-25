@@ -21,7 +21,7 @@
               <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
                 <md-table-cell md-label="Title">{{ item.title.substring(0, 30) }}</md-table-cell>
-                <md-table-cell md-label="Link">{{ item.description.substring(0, 30) }}</md-table-cell>
+                <md-table-cell md-label="Description">{{ item.description.substring(0, 30) }}</md-table-cell>
                 <md-table-cell md-label="Created">{{ item.created_at | prettyDate }}</md-table-cell>
                 <md-table-cell md-label="Action" >
                   <md-icon @click.native="$router.push(`html/${item.id}/edit`)">edit</md-icon>

@@ -21828,7 +21828,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "md-table-cell",
-                                  { attrs: { "md-label": "Link" } },
+                                  { attrs: { "md-label": "Description" } },
                                   [
                                     _vm._v(
                                       _vm._s(item.description.substring(0, 30))

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LinkController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**
+    All the routes resource related to links
+ */
+Route::resource('links', LinkController::class);

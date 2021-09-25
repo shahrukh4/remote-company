@@ -5,6 +5,7 @@ Vue.config.productionTip = false;
 
 import App from './App'
 import router from './router'
+import store from './store'
 
 
 // Plugins
@@ -26,5 +27,6 @@ Vue.use(MaterialDashboard);
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
 });

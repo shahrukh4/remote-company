@@ -13,7 +13,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _js_mixins_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/js/mixins/general */ "./resources/js/mixins/general.js");
+/* harmony import */ var _js_store_action_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/js/store/action.types */ "./resources/js/store/action.types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -65,6 +73,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -75,44 +89,41 @@ __webpack_require__.r(__webpack_exports__);
       link: {
         id: 0
       },
-      links: [{
-        id: 1,
-        title: 'Shahrukh',
-        link: "helopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.com",
-        created_at: "2018-06-06 10:10:10"
-      }, {
-        id: 2,
-        title: 'Anwar',
-        link: "helopeter.com",
-        created_at: "2018-06-06 10:10:10"
-      }, {
-        id: 3,
-        title: 'Farha',
-        link: "helopeter.com",
-        created_at: "2018-06-06 10:10:10"
-      }, {
-        id: 4,
-        title: 'Bobdu',
-        link: "helopeter.com",
-        created_at: "2018-06-06 10:10:10"
-      }],
       loaders: {
         "delete": false,
         confirmDelete: false
       }
     };
   },
-  methods: {
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+    links: function links(state) {
+      return state.links;
+    }
+  })),
+  created: function created() {
+    this.getLinks();
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapActions)({
+    getLinks: "links/".concat(_js_store_action_types__WEBPACK_IMPORTED_MODULE_2__.GET_LINKS)
+  })), {}, {
+    /**
+     * Handle Delete action
+     * @return void
+     */
     handleDelete: function handleDelete(linkId) {
       this.link.id = linkId;
       this.loaders["delete"] = true;
     },
+
+    /**
+     * Handle post delete confirmation
+     * @return void
+     */
     handleDeleteConfirmation: function handleDeleteConfirmation() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("https://jsonplaceholder.typicode.com/posts/".concat(this.link.id)).then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
         _this.loaders.confirmDelete = true;
       })["catch"](function (error) {
         console.log(error);
@@ -120,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.loaders["delete"] = false;
       });
     }
-  }
+  })
 });
 
 /***/ }),
@@ -21883,11 +21894,11 @@ var render = function() {
                         }
                       ]),
                       model: {
-                        value: _vm.links,
+                        value: _vm.links.links,
                         callback: function($$v) {
-                          _vm.links = $$v
+                          _vm.$set(_vm.links, "links", $$v)
                         },
-                        expression: "links"
+                        expression: "links.links"
                       }
                     })
                   ],

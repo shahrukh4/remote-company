@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\PDFFile;
-use App\Repositories\PDFRepository;
+use App\Repositories\ReviewRepository;
 
 class PDFFilesController extends Controller
 {
     public $pdfRepository;
 
-    public function __construct(PDFRepository $pdfRepository) {
+    public function __construct(ReviewRepository $pdfRepository) {
         $this->pdfRepository = $pdfRepository;
     }
 

@@ -24,9 +24,10 @@ Route::get('/', function () {
     All the routes related to pdfs
  */
 Route::group([], function() {
-    Route::resource('pdfs', PDFFilesController::class)->only([
-        'index'
-    ]);
+//    Route::resource('pdfs', PDFFilesController::class)->only([
+//        'index'
+//    ]);
+    Route::get('/pdfs', [PDFFilesController::class, 'getAllPdfs'])->name('pdfs.index');
     Route::get('/pdfs/{pdf}/download', [PDFFilesController::class, 'downloadPDF'])->name('pdfs.download');
 });
 
@@ -39,13 +40,11 @@ Route::group([], function() {
     ]);
 });
 
-/**
-All the routes related to links
- */
 Route::group([], function() {
-    Route::resource('links', LinkController::class)->only([
-        'index'
-    ]);
+//    Route::resource('links', LinkController::class)->only([
+//        'index'
+//    ]);
+    Route::get('/links', [LinkController::class, 'getAllLinks'])->name('links.index');
 });
 
 Route::get('{any}', function () {

@@ -58,6 +58,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -72,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
       html: {
         title: '',
         description: '',
-        content: 0
+        content: ''
       }
     };
   },
@@ -320,7 +323,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("md-input", {
+                _c("md-textarea", {
                   model: {
                     value: _vm.html.content,
                     callback: function($$v) {
@@ -370,7 +373,21 @@ var render = function() {
                 )
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _vm.html.content
+              ? _c("md-card", [
+                  _c(
+                    "small",
+                    [
+                      _c("md-card-content", {
+                        domProps: { innerHTML: _vm._s(_vm.html.content) }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              : _vm._e()
           ],
           1
         ),

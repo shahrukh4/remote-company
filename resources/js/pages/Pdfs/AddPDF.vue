@@ -11,8 +11,9 @@
         </md-field>
         <md-field>
           <label>{{!$route.meta.editMode ? 'Add' : 'Edit'}} File</label>
-          <md-input v-model="pdf.file"></md-input>
+          <md-file v-model="pdf.file" accept="application/pdf" />
           <div class="error" v-if="$v.pdf.file.$anyError && !$v.pdf.file.required">Please choose a file</div>
+          <div class="error" v-if="$v.pdf.file.$anyError && !$v.pdf.file.pdfRule">Choose PDF files only</div>
         </md-field>
         <div>
           <md-button class="md-dense md-raised md-primary" @click="handlePDFAction">
@@ -40,7 +41,9 @@
 
 <script>
   import axios from 'axios'
-  import { required } from 'vuelidate/lib/validators'
+  import { helpers, required } from 'vuelidate/lib/validators'
+
+  const pdfRule = helpers.regex('pdf.file', /\.(pdf)$/)
 
   export default {
     name: 'AddPDF',
@@ -58,6 +61,7 @@
           required
         },
         file: {
+          pdfRule,
           required
         }
       }

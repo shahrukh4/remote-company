@@ -1,4 +1,5 @@
 <template>
+  <!-- Links Table Section Begins -->
   <div class="content">
     <div class="md-layout">
       <div
@@ -16,8 +17,9 @@
               </div>
             </div>
           </md-card-header>
+          <!-- Table Content Begins -->
           <md-card-content>
-            <md-table v-model="links">
+            <md-table v-model="links.links">
               <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
                 <md-table-cell md-label="Title">{{ item.title.substring(0, 30) }}</md-table-cell>
@@ -29,10 +31,11 @@
                 </md-table-cell>
               </md-table-row>
             </md-table>
-          </md-card-content>
+          </md-card-content> <!-- Table Content Ends -->
         </md-card>
       </div>
     </div>
+    <!-- Action Dialog Begins -->
     <md-dialog-confirm
       md-title="Are you sure, you want to delete this link?"
       md-content="This will delete link permanently"
@@ -46,12 +49,15 @@
       :md-content="`Your link has been deleted.`"
       :md-active.sync="loaders.confirmDelete"
     />
-  </div>
+    <!-- Action Dialog Ends -->
+  </div> <!-- Links Table Section Ends -->
 </template>
 
 <script>
   import axios from 'axios'
+  import { mapState, mapActions } from 'vuex'
   import GeneralMixin from '@/js/mixins/general'
+  import {GET_LINKS} from '@/js/store/action.types'
 
   export default {
     name: 'Links',
@@ -59,43 +65,36 @@
     data() {
       return {
         link: {id: 0},
-        links: [
-          {
-            id: 1,
-            title: 'Shahrukh',
-            link: "helopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.comhelopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          },
-          {
-            id: 2,
-            title: 'Anwar',
-            link: "helopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          },
-          {
-            id: 3,
-            title: 'Farha',
-            link: "helopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          },{
-            id: 4,
-            title: 'Bobdu',
-            link: "helopeter.com",
-            created_at: "2018-06-06 10:10:10"
-          }
-        ],
         loaders: {delete: false, confirmDelete: false}
       };
     },
+    computed: {
+      ...mapState({
+        links: state => state.links
+      })
+    },
+    created() {
+      this.getLinks()
+    },
     methods: {
+      ...mapActions({
+        getLinks: `links/${GET_LINKS}`
+      }),
+      /**
+       * Handle Delete action
+       * @return void
+       */
       handleDelete (linkId) {
         this.link.id = linkId
         this.loaders.delete = true
       },
+      /**
+       * Handle post delete confirmation
+       * @return void
+       */
       handleDeleteConfirmation () {
         axios.delete(`https://jsonplaceholder.typicode.com/posts/${this.link.id}`)
         .then(({data}) => {
-          console.log(data)
           this.loaders.confirmDelete = true
         })
         .catch((error) => {

@@ -54,8 +54,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
+var pdfRule = vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.helpers.regex('pdf.file', /\.(pdf)$/);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AddPDF',
   data: function data() {
@@ -77,6 +79,7 @@ __webpack_require__.r(__webpack_exports__);
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
       },
       file: {
+        pdfRule: pdfRule,
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__.required
       }
     }
@@ -290,7 +293,8 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("md-input", {
+                _c("md-file", {
+                  attrs: { accept: "application/pdf" },
                   model: {
                     value: _vm.pdf.file,
                     callback: function($$v) {
@@ -303,6 +307,12 @@ var render = function() {
                 _vm.$v.pdf.file.$anyError && !_vm.$v.pdf.file.required
                   ? _c("div", { staticClass: "error" }, [
                       _vm._v("Please choose a file")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.$v.pdf.file.$anyError && !_vm.$v.pdf.file.pdfRule
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v("Choose PDF files only")
                     ])
                   : _vm._e()
               ],

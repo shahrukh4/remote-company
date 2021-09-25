@@ -15,7 +15,7 @@
         </md-field>
         <md-field>
           <label>{{!$route.meta.editMode ? 'Add' : 'Edit'}} Content</label>
-          <md-input v-model="html.content"></md-input>
+          <md-textarea v-model="html.content"></md-textarea>
           <div class="error" v-if="$v.html.content.$anyError && !$v.html.content.required">Please enter some content</div>
         </md-field>
         <div>
@@ -32,6 +32,9 @@
             <span v-else>{{!$route.meta.editMode ? 'Add' : 'Edit'}} HTML</span>
           </md-button>
         </div>
+        <md-card v-if="html.content">
+          <small><md-card-content v-html="html.content"></md-card-content></small>
+        </md-card>
       </div>
       <md-dialog-alert
         md-title="HTML updated!"
@@ -52,7 +55,7 @@
       return {
         loading: {add: false, update: false, showPrompt: false},
         html: {
-          title: '', description: '', content: 0
+          title: '', description: '', content: ''
         }
       }
     },

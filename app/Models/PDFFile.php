@@ -11,6 +11,15 @@ class PDFFile extends Model
 
     protected $table = 'pdfs';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title', 'file',
+    ];
+
     protected $casts = [
         'file' => 'array',
     ];
