@@ -21844,7 +21844,11 @@ var render = function() {
                                   { attrs: { "md-label": "Link" } },
                                   [
                                     _vm._v(
-                                      _vm._s(item.file.name.substring(0, 30))
+                                      _vm._s(
+                                        item.file
+                                          ? item.file.name.substring(0, 30)
+                                          : ""
+                                      )
                                     )
                                   ]
                                 ),

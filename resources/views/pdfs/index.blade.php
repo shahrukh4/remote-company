@@ -13,7 +13,9 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$pdf->title}}</h5>
-                                            <a href="{{route('pdfs.download', ['pdf' => $pdf->id])}}" class="btn btn-primary btn-sm">Download</a>
+                                            @if(!empty($pdf->file))
+                                                <a href="{{route('pdfs.download', ['pdf' => $pdf->id])}}" class="btn btn-primary btn-sm">Download</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
