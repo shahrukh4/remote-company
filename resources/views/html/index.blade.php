@@ -1,7 +1,7 @@
 @extends('partials.master')
 @section('title', 'HTML Snippets')
 @section('content')
-    <main id="htmlss">
+    <main id="html">
         <section class="cta section">
             <div class="container-sm">
                 <div class="cta-inner section-inner">

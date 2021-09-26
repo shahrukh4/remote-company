@@ -24,7 +24,7 @@ class HTMLFactory extends Factory
         return [
             'title' => $this->faker->name(),
             'description' => $this->faker->paragraph,
-            'content' => $this->faker->randomHtml(1,3),
+            'content' => '<b>'. $this->faker->name(). '</b>',
         ];
     }
 }
