@@ -45,7 +45,7 @@ class LinkRepository implements LinkRepositoryInterface {
 
         $link->link  = $params['link'];
         $link->title  = $params['title'];
-        $link->open_new_tab  = $params['open_new_tab'];
+        $link->open_new_tab  = !empty($params['open_new_tab']) ? 1 : 0;
         $link->save();
     }
 

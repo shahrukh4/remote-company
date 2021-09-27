@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\HTMLRepository;
@@ -27,7 +28,15 @@ class HTMLSnippetController extends Controller
      * @return Collection
      */
     public function index(): Collection {
-        return $this->htmlRepository->all();
+        try {
+            return $this->htmlRepository->all();
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -36,16 +45,24 @@ class HTMLSnippetController extends Controller
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse {
-        $this->htmlRepository->store([
-            'title' => $request->title,
-            'content' => $request->snippet,
-            'description' => $request->description,
-        ]);
+        try {        
+            $this->htmlRepository->store([
+                'title' => $request->title,
+                'content' => $request->snippet,
+                'description' => !empty($request->description) ? $request->description : '',
+            ]);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'HTML added successfully.'
-        ], 201);
+            return response()->json([
+                'error' => false,
+                'message' => 'HTML added successfully.'
+            ], 201);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -54,13 +71,21 @@ class HTMLSnippetController extends Controller
      * @return JsonResponse
      */
     public function show($html): JsonResponse {
-        $html = $this->htmlRepository->show($html);
+        try {
+            $html = $this->htmlRepository->show($html);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'HTML data as follows',
-            'data' => $html,
-        ], 200);
+            return response()->json([
+                'error' => false,
+                'message' => 'HTML data as follows',
+                'data' => $html,
+            ], 200);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -70,16 +95,24 @@ class HTMLSnippetController extends Controller
      * @return JsonResponse
      */
     public function update(Request $request, $html): JsonResponse {
-        $this->htmlRepository->update($html, [
-            'title' => $request->title,
-            'content' => $request->snippet,
-            'description' => $request->description,
-        ]);
+        try {        
+            $this->htmlRepository->update($html, [
+                'title' => $request->title,
+                'content' => $request->snippet,
+                'description' => !empty($request->description) ? $request->description : '',
+            ]);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'HTML updated successfully.'
-        ], 201);
+            return response()->json([
+                'error' => false,
+                'message' => 'HTML updated successfully.'
+            ], 201);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -88,22 +121,38 @@ class HTMLSnippetController extends Controller
      * @return JsonResponse
      */
     public function destroy($html): JsonResponse {
-        $this->htmlRepository->destroy($html);
+        try {
+            $this->htmlRepository->destroy($html);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'HTML deleted successfully.'
-        ], 200);
+            return response()->json([
+                'error' => false,
+                'message' => 'HTML deleted successfully.'
+            ], 200);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
      * Show all the available HTML data
      */
     public function showAllHTMLCodes() {
-        $html = $this->htmlRepository->all();
+        try {
+            $html = $this->htmlRepository->all();
 
-        return view('html.index', [
-            'html' => $html
-        ]);
+            return view('html.index', [
+                'html' => $html
+            ]);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

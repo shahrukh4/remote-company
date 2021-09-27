@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\LinkRepository;
@@ -27,7 +28,15 @@ class LinkController extends Controller
      * @return Collection
      */
     public function index(): Collection {
-        return $this->linkRepository->all();
+        try {
+            return $this->linkRepository->all();
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -35,16 +44,24 @@ class LinkController extends Controller
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse {
-        $this->linkRepository->store([
-            'link' => $request->link,
-            'title' => $request->title,
-            'open_new_tab' => $request->open_new_tab,
-        ]);
+        try {
+            $this->linkRepository->store([
+                'link' => $request->link,
+                'title' => $request->title,
+                'open_new_tab' => !empty($request->open_new_tab) ? 1 : 0,
+            ]);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'Link added successfully.'
-        ], 201);
+            return response()->json([
+                'error' => false,
+                'message' => 'Link added successfully.'
+            ], 201);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -52,13 +69,21 @@ class LinkController extends Controller
      * @return JsonResponse
      */
     public function show($link): JsonResponse {
-        $link = $this->linkRepository->show($link);
+        try {
+            $link = $this->linkRepository->show($link);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'Link data as follows',
-            'data' => $link,
-        ], 200);
+            return response()->json([
+                'error' => false,
+                'message' => 'Link data as follows',
+                'data' => $link,
+            ], 200);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -66,16 +91,24 @@ class LinkController extends Controller
      * @return JsonResponse
      */
     public function update(Request $request, $linkId): JsonResponse {
-        $this->linkRepository->update($linkId, [
-            'link' => $request->link,
-            'title' => $request->title,
-            'open_new_tab' => $request->open_new_tab,
-        ]);
+        try {
+            $this->linkRepository->update($linkId, [
+                'link' => $request->link,
+                'title' => $request->title,
+                'open_new_tab' => !empty($request->open_new_tab) ? 1 : 0,
+            ]);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'Link updated successfully.'
-        ], 201);
+            return response()->json([
+                'error' => false,
+                'message' => 'Link updated successfully.'
+            ], 201);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -84,12 +117,20 @@ class LinkController extends Controller
      * @return JsonResponse
      */
     public function destroy($linkId): JsonResponse {
-        $this->linkRepository->destroy($linkId);
+        try {
+            $this->linkRepository->destroy($linkId);
 
-        return response()->json([
-            'error' => false,
-            'message' => 'Link deleted successfully.'
-        ], 200);
+            return response()->json([
+                'error' => false,
+                'message' => 'Link deleted successfully.'
+            ], 200);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -97,10 +138,18 @@ class LinkController extends Controller
      * @return mixed
      */
     public function getAllLinks () {
-        $links = $this->linkRepository->all();
+        try {
+            $links = $this->linkRepository->all();
 
-        return view('links.index', [
-            'links' => $links
-        ]);
+            return view('links.index', [
+                'links' => $links
+            ]);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

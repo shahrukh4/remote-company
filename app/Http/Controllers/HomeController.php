@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\PDFRepository;
@@ -45,15 +46,23 @@ class HomeController extends Controller
      * @return JsonResponse
      */
     public function getDashboardData(): JsonResponse {
-        $data = [
-            'pdfs' => $this->pdfRepository->all(),
-            'html' => $this->htmlRepository->all(),
-            'links' => $this->linkRepository->all(),
-        ];
-
-        return response()->json([
-            'error' => false,
-            'data' => $data,
-        ]);
+        try {
+            $data = [
+                'pdfs' => $this->pdfRepository->all(),
+                'html' => $this->htmlRepository->all(),
+                'links' => $this->linkRepository->all(),
+            ];
+            
+            return response()->json([
+                'error' => false,
+                'data' => $data,
+            ]);
+        }
+        catch(Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
